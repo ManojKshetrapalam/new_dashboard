@@ -15,6 +15,9 @@
 </head>
 
 <body>
+    <!-- Mobile overlay -->
+    <div class="sidebar-overlay" id="sidebarOverlay"></div>
+
     <!-- Sidebar -->
     <aside class="sidebar" id="sidebar">
         <div class="sidebar-header">
@@ -22,27 +25,42 @@
                 <span class="logo-icon">💍</span>
                 <span class="logo-text">WedMetrics</span>
             </div>
-            <button class="sidebar-toggle" id="sidebarToggle">☰</button>
+            <button class="sidebar-close" id="sidebarClose" aria-label="Close menu">✕</button>
         </div>
         <nav class="sidebar-nav">
+            <!-- Dashboard — always visible -->
             <a href="#" class="nav-item active" data-page="dashboard">
-                <span class="nav-icon">📊</span><span class="nav-label">Dashboard</span>
+                <span class="nav-icon">📊</span>
+                <span class="nav-label">Dashboard</span>
             </a>
-            <a href="#" class="nav-item" data-page="leads">
-                <span class="nav-icon">🎯</span><span class="nav-label">Lead Details</span>
-            </a>
-            <a href="#" class="nav-item" data-page="b2b-features">
-                <span class="nav-icon">🏢</span><span class="nav-label">B2B Features</span>
-            </a>
-            <a href="#" class="nav-item" data-page="b2c-features">
-                <span class="nav-icon">👰</span><span class="nav-label">B2C Features</span>
-            </a>
-            <a href="#" class="nav-item" data-page="conversions">
-                <span class="nav-icon">💰</span><span class="nav-label">Conversions</span>
-            </a>
-            <a href="#" class="nav-item" data-page="bytes-quotes">
-                <span class="nav-icon">📦</span><span class="nav-label">Bytes & Quotes</span>
-            </a>
+
+            <!-- Collapsible group (collapsed by default) -->
+            <div class="nav-group">
+                <button class="nav-group-toggle" id="navGroupToggle" aria-expanded="false">
+                    <span class="nav-group-toggle-label">
+                        <span class="nav-icon">📂</span>
+                        <span class="nav-label">More Pages</span>
+                    </span>
+                    <span class="nav-arrow" id="navArrow">›</span>
+                </button>
+                <div class="nav-sub" id="navSub">
+                    <a href="#" class="nav-item nav-sub-item" data-page="leads">
+                        <span class="nav-icon">🎯</span><span class="nav-label">Lead Details</span>
+                    </a>
+                    <a href="#" class="nav-item nav-sub-item" data-page="b2b-features">
+                        <span class="nav-icon">🏢</span><span class="nav-label">B2B Features</span>
+                    </a>
+                    <a href="#" class="nav-item nav-sub-item" data-page="b2c-features">
+                        <span class="nav-icon">👰</span><span class="nav-label">B2C Features</span>
+                    </a>
+                    <a href="#" class="nav-item nav-sub-item" data-page="conversions">
+                        <span class="nav-icon">💰</span><span class="nav-label">Conversions</span>
+                    </a>
+                    <a href="#" class="nav-item nav-sub-item" data-page="bytes-quotes">
+                        <span class="nav-icon">📦</span><span class="nav-label">Bytes &amp; Quotes</span>
+                    </a>
+                </div>
+            </div>
         </nav>
         <div class="sidebar-footer">
             <div class="user-info">
@@ -60,8 +78,12 @@
         <!-- Top Bar -->
         <header class="topbar">
             <div class="topbar-left">
-                <h1 class="page-title" id="pageTitle">Dashboard Overview</h1>
-                <p class="page-subtitle" id="pageSubtitle">Real-time analytics across all verticals</p>
+                <!-- Mobile hamburger -->
+                <button class="mobile-menu-btn" id="mobileMenuBtn" aria-label="Open menu">☰</button>
+                <div>
+                    <h1 class="page-title" id="pageTitle">Dashboard Overview</h1>
+                    <p class="page-subtitle" id="pageSubtitle">Real-time analytics across all verticals</p>
+                </div>
             </div>
             <div class="topbar-right">
                 <div class="date-filter">

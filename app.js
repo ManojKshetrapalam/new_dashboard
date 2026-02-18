@@ -788,13 +788,48 @@ function initDashboardGrids() {
 
 // ===== EVENTS =====
 document.addEventListener('DOMContentLoaded', () => {
-  // Sidebar nav
+  // ===== COLLAPSIBLE NAV GROUP =====
+  const navGroupToggle = document.getElementById('navGroupToggle');
+  const navSub = document.getElementById('navSub');
+  const navArrow = document.getElementById('navArrow');
+
+  navGroupToggle?.addEventListener('click', () => {
+    const isOpen = navSub.classList.toggle('open');
+    navArrow.classList.toggle('open', isOpen);
+    navGroupToggle.setAttribute('aria-expanded', isOpen);
+  });
+
+  // ===== MOBILE SIDEBAR =====
+  const sidebar = document.getElementById('sidebar');
+  const overlay = document.getElementById('sidebarOverlay');
+  const mobileMenuBtn = document.getElementById('mobileMenuBtn');
+  const sidebarClose = document.getElementById('sidebarClose');
+
+  function openSidebar() {
+    sidebar.classList.add('open');
+    overlay.classList.add('open');
+    document.body.style.overflow = 'hidden';
+  }
+
+  function closeSidebar() {
+    sidebar.classList.remove('open');
+    overlay.classList.remove('open');
+    document.body.style.overflow = '';
+  }
+
+  mobileMenuBtn?.addEventListener('click', openSidebar);
+  sidebarClose?.addEventListener('click', closeSidebar);
+  overlay?.addEventListener('click', closeSidebar);
+
+  // Sidebar nav — close sidebar on mobile after navigation
   document.querySelectorAll('.nav-item').forEach(item => {
     item.addEventListener('click', e => {
       e.preventDefault();
       navigateTo(item.dataset.page);
+      if (window.innerWidth <= 900) closeSidebar();
     });
   });
+
 
   // Clickable stat cards
   document.querySelectorAll('.stat-card.clickable').forEach(card => {
