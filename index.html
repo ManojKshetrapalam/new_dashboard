@@ -1,0 +1,418 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>WedMetrics — Wedding Platform Analytics Dashboard</title>
+    <meta name="description"
+        content="Comprehensive analytics dashboard for tracking wedding platform leads, feature usage, and sales performance across B2B, B2C, Buy Leads, and IPM verticals." />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap"
+        rel="stylesheet" />
+    <link rel="stylesheet" href="styles.css" />
+    <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.0/dist/chart.umd.min.js"></script>
+</head>
+
+<body>
+    <!-- Sidebar -->
+    <aside class="sidebar" id="sidebar">
+        <div class="sidebar-header">
+            <div class="logo">
+                <span class="logo-icon">💍</span>
+                <span class="logo-text">WedMetrics</span>
+            </div>
+            <button class="sidebar-toggle" id="sidebarToggle">☰</button>
+        </div>
+        <nav class="sidebar-nav">
+            <a href="#" class="nav-item active" data-page="dashboard">
+                <span class="nav-icon">📊</span><span class="nav-label">Dashboard</span>
+            </a>
+            <a href="#" class="nav-item" data-page="leads">
+                <span class="nav-icon">🎯</span><span class="nav-label">Lead Details</span>
+            </a>
+            <a href="#" class="nav-item" data-page="b2b-features">
+                <span class="nav-icon">🏢</span><span class="nav-label">B2B Features</span>
+            </a>
+            <a href="#" class="nav-item" data-page="b2c-features">
+                <span class="nav-icon">👰</span><span class="nav-label">B2C Features</span>
+            </a>
+            <a href="#" class="nav-item" data-page="conversions">
+                <span class="nav-icon">💰</span><span class="nav-label">Conversions</span>
+            </a>
+            <a href="#" class="nav-item" data-page="bytes-quotes">
+                <span class="nav-icon">📦</span><span class="nav-label">Bytes & Quotes</span>
+            </a>
+        </nav>
+        <div class="sidebar-footer">
+            <div class="user-info">
+                <div class="user-avatar">MK</div>
+                <div class="user-details">
+                    <div class="user-name">Admin</div>
+                    <div class="user-role">Super Admin</div>
+                </div>
+            </div>
+        </div>
+    </aside>
+
+    <!-- Main Content -->
+    <main class="main-content" id="mainContent">
+        <!-- Top Bar -->
+        <header class="topbar">
+            <div class="topbar-left">
+                <h1 class="page-title" id="pageTitle">Dashboard Overview</h1>
+                <p class="page-subtitle" id="pageSubtitle">Real-time analytics across all verticals</p>
+            </div>
+            <div class="topbar-right">
+                <div class="date-filter">
+                    <label class="date-label">From</label>
+                    <input type="date" id="dateFrom" class="date-input" value="2026-02-01" />
+                    <label class="date-label">To</label>
+                    <input type="date" id="dateTo" class="date-input" value="2026-02-18" />
+                    <button class="apply-btn" id="applyDateBtn">Apply</button>
+                </div>
+                <div class="live-badge">
+                    <span class="live-dot"></span> Live
+                </div>
+            </div>
+        </header>
+
+        <!-- Pages -->
+        <div class="page-container">
+
+            <!-- ===== DASHBOARD PAGE ===== -->
+            <section class="page active" id="page-dashboard">
+                <!-- Vertical Lead Cards -->
+                <div class="section-title">📡 Lead Sources by Vertical</div>
+                <div class="stats-grid">
+                    <div class="stat-card pink clickable" data-target="leads" data-filter="b2b">
+                        <div class="stat-icon">🏢</div>
+                        <div class="stat-info">
+                            <div class="stat-label">B2B App Leads</div>
+                            <div class="stat-value" data-count="1284">1,284</div>
+                            <div class="stat-sub">
+                                <span class="badge green">↑ 12%</span> vs last period
+                            </div>
+                        </div>
+                        <div class="stat-detail">
+                            <div class="mini-bar">
+                                <div class="mini-fill" style="width:72%"></div>
+                            </div>
+                            <span class="mini-label">Sold: <strong class="clickable-num" data-target="leads"
+                                    data-filter="b2b-sold">924</strong></span>
+                        </div>
+                    </div>
+
+                    <div class="stat-card lavender clickable" data-target="leads" data-filter="b2c">
+                        <div class="stat-icon">👰</div>
+                        <div class="stat-info">
+                            <div class="stat-label">B2C App Leads</div>
+                            <div class="stat-value" data-count="876">876</div>
+                            <div class="stat-sub">
+                                <span class="badge green">↑ 8%</span> vs last period
+                            </div>
+                        </div>
+                        <div class="stat-detail">
+                            <div class="mini-bar">
+                                <div class="mini-fill" style="width:61%"></div>
+                            </div>
+                            <span class="mini-label">Sold: <strong class="clickable-num" data-target="leads"
+                                    data-filter="b2c-sold">534</strong></span>
+                        </div>
+                    </div>
+
+                    <div class="stat-card mint clickable" data-target="leads" data-filter="buyleads">
+                        <div class="stat-icon">🛒</div>
+                        <div class="stat-info">
+                            <div class="stat-label">Buy Leads</div>
+                            <div class="stat-value" data-count="2156">2,156</div>
+                            <div class="stat-sub">
+                                <span class="badge red">↓ 3%</span> vs last period
+                            </div>
+                        </div>
+                        <div class="stat-detail">
+                            <div class="mini-bar">
+                                <div class="mini-fill" style="width:55%"></div>
+                            </div>
+                            <span class="mini-label">Sold: <strong class="clickable-num" data-target="leads"
+                                    data-filter="buyleads-sold">1,186</strong></span>
+                        </div>
+                    </div>
+
+                    <div class="stat-card peach clickable" data-target="leads" data-filter="ipm">
+                        <div class="stat-icon">📣</div>
+                        <div class="stat-info">
+                            <div class="stat-label">IPM Leads</div>
+                            <div class="stat-value" data-count="643">643</div>
+                            <div class="stat-sub">
+                                <span class="badge green">↑ 21%</span> vs last period
+                            </div>
+                        </div>
+                        <div class="stat-detail">
+                            <div class="mini-bar">
+                                <div class="mini-fill" style="width:68%"></div>
+                            </div>
+                            <span class="mini-label">Sold: <strong class="clickable-num" data-target="leads"
+                                    data-filter="ipm-sold">437</strong></span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Bytes, Quotes, Packages Row -->
+                <div class="section-title">🔥 Generated vs Sold — Bytes, Quotes & Packages</div>
+                <div class="conversion-row">
+                    <div class="conv-card clickable" data-target="bytes-quotes" data-filter="bytes">
+                        <div class="conv-icon">📝</div>
+                        <div class="conv-title">Wedding Bytes</div>
+                        <div class="conv-numbers">
+                            <div class="conv-item">
+                                <div class="conv-num blue clickable-num" data-target="bytes-quotes"
+                                    data-filter="bytes-gen">3,421</div>
+                                <div class="conv-lbl">Generated</div>
+                            </div>
+                            <div class="conv-arrow">→</div>
+                            <div class="conv-item">
+                                <div class="conv-num green clickable-num" data-target="bytes-quotes"
+                                    data-filter="bytes-sold">1,892</div>
+                                <div class="conv-lbl">Sold</div>
+                            </div>
+                        </div>
+                        <div class="conv-rate">Conversion: <strong>55.3%</strong></div>
+                    </div>
+
+                    <div class="conv-card clickable" data-target="bytes-quotes" data-filter="quotes">
+                        <div class="conv-icon">💬</div>
+                        <div class="conv-title">Get Quote</div>
+                        <div class="conv-numbers">
+                            <div class="conv-item">
+                                <div class="conv-num blue clickable-num" data-target="bytes-quotes"
+                                    data-filter="quotes-gen">1,876</div>
+                                <div class="conv-lbl">Generated</div>
+                            </div>
+                            <div class="conv-arrow">→</div>
+                            <div class="conv-item">
+                                <div class="conv-num green clickable-num" data-target="bytes-quotes"
+                                    data-filter="quotes-sold">943</div>
+                                <div class="conv-lbl">Sold</div>
+                            </div>
+                        </div>
+                        <div class="conv-rate">Conversion: <strong>50.3%</strong></div>
+                    </div>
+
+                    <div class="conv-card clickable" data-target="bytes-quotes" data-filter="packages">
+                        <div class="conv-icon">📦</div>
+                        <div class="conv-title">Packages</div>
+                        <div class="conv-numbers">
+                            <div class="conv-item">
+                                <div class="conv-num blue clickable-num" data-target="bytes-quotes"
+                                    data-filter="packages-gen">2,104</div>
+                                <div class="conv-lbl">Generated</div>
+                            </div>
+                            <div class="conv-arrow">→</div>
+                            <div class="conv-item">
+                                <div class="conv-num green clickable-num" data-target="bytes-quotes"
+                                    data-filter="packages-sold">1,347</div>
+                                <div class="conv-lbl">Sold</div>
+                            </div>
+                        </div>
+                        <div class="conv-rate">Conversion: <strong>64.0%</strong></div>
+                    </div>
+                </div>
+
+                <!-- B2B App Features Full Grid -->
+                <div class="section-title">🏢 B2B App — Feature Usage <span class="section-sub">(App Subscribers)</span>
+                </div>
+                <div class="features-grid" id="dashB2bGrid"></div>
+
+                <!-- B2C App Features Full Grid -->
+                <div class="section-title">👰 B2C App — Feature Usage <span class="section-sub">(App Subscribers)</span>
+                </div>
+                <div class="features-grid" id="dashB2cGrid"></div>
+
+                <!-- Bytes, Quotes, Packages Full Cards -->
+                <div class="section-title">📦 Bytes, Quotes &amp; Packages — Generated vs Sold</div>
+                <div class="bq-cards-grid" id="dashBqGrid"></div>
+
+            </section>
+
+            <!-- ===== LEAD DETAILS PAGE ===== -->
+            <section class="page" id="page-leads">
+                <div class="page-filter-bar">
+                    <div class="filter-tabs" id="leadFilterTabs">
+                        <button class="ftab active" data-filter="all">All Leads</button>
+                        <button class="ftab" data-filter="b2b">B2B App</button>
+                        <button class="ftab" data-filter="b2c">B2C App</button>
+                        <button class="ftab" data-filter="buyleads">Buy Leads</button>
+                        <button class="ftab" data-filter="ipm">IPM</button>
+                        <button class="ftab" data-filter="sold">Sold Only</button>
+                    </div>
+                    <div class="search-box">
+                        <input type="text" placeholder="🔍 Search leads..." id="leadSearch" class="search-input" />
+                    </div>
+                </div>
+
+                <div class="table-card">
+                    <table class="data-table" id="leadsTable">
+                        <thead>
+                            <tr>
+                                <th>Lead ID</th>
+                                <th>Name</th>
+                                <th>Vertical</th>
+                                <th>Source</th>
+                                <th>Date</th>
+                                <th>Status</th>
+                                <th>Value</th>
+                                <th>Action</th>
+                            </tr>
+                        </thead>
+                        <tbody id="leadsTableBody">
+                            <!-- Populated by JS -->
+                        </tbody>
+                    </table>
+                    <div class="table-pagination">
+                        <button class="page-btn" id="prevPage">← Prev</button>
+                        <span id="pageInfo">Page 1 of 5</span>
+                        <button class="page-btn" id="nextPage">Next →</button>
+                    </div>
+                </div>
+            </section>
+
+            <!-- ===== B2B FEATURES PAGE ===== -->
+            <section class="page" id="page-b2b-features">
+                <div class="section-title">🏢 B2B App — Feature Usage Analytics</div>
+                <div class="features-grid" id="b2bFeaturesGrid">
+                    <!-- Populated by JS -->
+                </div>
+                <div class="chart-card full-width">
+                    <div class="chart-title">B2B Feature Usage Trend (Last 6 Months)</div>
+                    <canvas id="b2bTrendChart" height="180"></canvas>
+                </div>
+            </section>
+
+            <!-- ===== B2C FEATURES PAGE ===== -->
+            <section class="page" id="page-b2c-features">
+                <div class="section-title">👰 B2C App — Feature Usage Analytics</div>
+                <div class="features-grid" id="b2cFeaturesGrid">
+                    <!-- Populated by JS -->
+                </div>
+                <div class="chart-card full-width">
+                    <div class="chart-title">B2C Feature Usage Trend (Last 6 Months)</div>
+                    <canvas id="b2cTrendChart" height="180"></canvas>
+                </div>
+            </section>
+
+            <!-- ===== CONVERSIONS PAGE ===== -->
+            <section class="page" id="page-conversions">
+                <div class="section-title">💰 Lead Conversion Details</div>
+                <div class="conv-summary-row">
+                    <div class="conv-summary-card">
+                        <div class="cs-label">Total Leads Generated</div>
+                        <div class="cs-value">4,959</div>
+                    </div>
+                    <div class="conv-summary-card green-card">
+                        <div class="cs-label">Total Leads Sold</div>
+                        <div class="cs-value">3,081</div>
+                    </div>
+                    <div class="conv-summary-card blue-card">
+                        <div class="cs-label">Overall Conversion Rate</div>
+                        <div class="cs-value">62.1%</div>
+                    </div>
+                    <div class="conv-summary-card peach-card">
+                        <div class="cs-label">Avg. Lead Value</div>
+                        <div class="cs-value">₹4,250</div>
+                    </div>
+                </div>
+                <div class="charts-row">
+                    <div class="chart-card">
+                        <div class="chart-title">Conversion by Vertical</div>
+                        <canvas id="conversionBarChart" height="250"></canvas>
+                    </div>
+                    <div class="chart-card">
+                        <div class="chart-title">Monthly Revenue from Leads</div>
+                        <canvas id="revenueChart" height="250"></canvas>
+                    </div>
+                </div>
+                <div class="table-card">
+                    <div class="chart-title" style="padding:16px 20px 0">Detailed Conversion Log</div>
+                    <table class="data-table">
+                        <thead>
+                            <tr>
+                                <th>Vertical</th>
+                                <th>Generated</th>
+                                <th>Sold</th>
+                                <th>Pending</th>
+                                <th>Conversion %</th>
+                                <th>Revenue</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td><span class="badge-pill pink-pill">B2B App</span></td>
+                                <td>1,284</td>
+                                <td>924</td>
+                                <td>360</td>
+                                <td><span class="pct-bar"><span style="width:72%"></span>72%</span></td>
+                                <td>₹39.2L</td>
+                            </tr>
+                            <tr>
+                                <td><span class="badge-pill lavender-pill">B2C App</span></td>
+                                <td>876</td>
+                                <td>534</td>
+                                <td>342</td>
+                                <td><span class="pct-bar"><span style="width:61%"></span>61%</span></td>
+                                <td>₹22.7L</td>
+                            </tr>
+                            <tr>
+                                <td><span class="badge-pill mint-pill">Buy Leads</span></td>
+                                <td>2,156</td>
+                                <td>1,186</td>
+                                <td>970</td>
+                                <td><span class="pct-bar"><span style="width:55%"></span>55%</span></td>
+                                <td>₹50.4L</td>
+                            </tr>
+                            <tr>
+                                <td><span class="badge-pill peach-pill">IPM</span></td>
+                                <td>643</td>
+                                <td>437</td>
+                                <td>206</td>
+                                <td><span class="pct-bar"><span style="width:68%"></span>68%</span></td>
+                                <td>₹18.6L</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </section>
+
+            <!-- ===== BYTES & QUOTES PAGE ===== -->
+            <section class="page" id="page-bytes-quotes">
+                <div class="section-title">📦 Bytes, Quotes & Packages — Detailed View</div>
+                <div class="filter-tabs" id="bqFilterTabs" style="margin-bottom:20px">
+                    <button class="ftab active" data-filter="all-bq">All</button>
+                    <button class="ftab" data-filter="bytes">Bytes</button>
+                    <button class="ftab" data-filter="quotes">Quotes</button>
+                    <button class="ftab" data-filter="packages">Packages</button>
+                </div>
+                <div class="bq-cards-grid" id="bqCardsGrid">
+                    <!-- Populated by JS -->
+                </div>
+                <div class="chart-card full-width">
+                    <div class="chart-title">Bytes vs Quotes vs Packages — Monthly Comparison</div>
+                    <canvas id="bqCompareChart" height="200"></canvas>
+                </div>
+            </section>
+
+        </div><!-- end page-container -->
+    </main>
+
+    <!-- Lead Detail Modal -->
+    <div class="modal-overlay" id="modalOverlay">
+        <div class="modal" id="leadModal">
+            <button class="modal-close" id="modalClose">✕</button>
+            <div id="modalContent"></div>
+        </div>
+    </div>
+
+    <script src="app.js"></script>
+</body>
+
+</html>
