@@ -65,7 +65,7 @@ class LeadBulkUploadController extends Controller
         $errors   = [];
         $rowNum   = 1;
 
-        $enquiryOptions = ['Venue', 'Catering', 'Photography', 'Decoration', 'Mehendi', 'Music', 'Other'];
+        $enquiryOptions = \App\Models\EnquiryType::pluck('name')->toArray();
 
         while (($row = fgetcsv($handle)) !== false) {
             $rowNum++;

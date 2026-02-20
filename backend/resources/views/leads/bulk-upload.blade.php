@@ -161,7 +161,7 @@
         </div>
         <p class="card-desc" style="margin-bottom:16px">
             Valid values for <strong>enquiry_for</strong>:
-            Venue, Catering, Photography, Decoration, Mehendi, Music, Other
+            {{ \App\Models\EnquiryType::pluck('name')->implode(', ') }}
         </p>
         <a href="{{ route('leads.sample-csv') }}" class="btn btn-outline">
             ⬇️ Download Sample CSV

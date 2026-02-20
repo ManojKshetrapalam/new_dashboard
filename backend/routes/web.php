@@ -4,7 +4,14 @@ use App\Http\Controllers\LeadBulkUploadController;
 use Illuminate\Support\Facades\Route;
 
 Route::get('/', function () {
-    return view('welcome');
+    return redirect()->route('dashboard');
+});
+
+Route::middleware([
+    'auth',
+])->group(function () {
+    Route::get('/dashboard', [\App\Http\Controllers\DashboardController::class, 'index'])->name('dashboard');
+    Route::get('/dashboard/export-leads', [\App\Http\Controllers\DashboardController::class, 'exportLeads'])->name('dashboard.export-leads');
 });
 
 // Leads Bulk Upload routes
